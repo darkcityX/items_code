@@ -1,0 +1,30 @@
+@mc1: #fff;
+@mc2: #8675CB;
+
+.resize{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    border: none;
+}
+
+/**
+ * 四、flex父容器设置函数
+ * @direction   排列方向
+ * @Alignment   对齐方式
+*/
+.flexParent(@direction:row, @Alignment:space-between){
+    display: flex;
+    flex-direction: @direction;
+    flex-wrap: nowrap;
+    justify-content: @Alignment;
+}
+
+/*
+ * 五、背景渐变色
+ * @color1 颜色1
+ * @color2 颜色2
+*/
+.bgGradient(@color1: #8a67e1,@color2:#ea52a1){
+    background: linear-gradient(90deg, @color1,@color2);
+}

@@ -1,0 +1,234 @@
+<!-- 我的作品集 -->
+<view class='myCollectionPage'>
+    <!-- 一、头部区域 -->
+    <view class='head-top'>
+        <!-- 1.1 -->
+        <view class='head-left'></view>
+        <!-- 1.2 -->
+        <view class='head-center'>
+            <icon
+                catchtap="showCard"
+                class="icon-liebiao {{showCard ? 'active': '' }}"></icon>
+            <icon
+                catchtap="showList" 
+                class="icon-icon-test {{!showCard ? 'active': '' }}"></icon>
+        </view>
+        <!-- 1.3 -->
+        <view class='head-right'>
+            <text 
+                wx:if='{{ isShowUploadText }}'
+                class="uploadText active"
+                data-shopId='{{ shopId }}'
+                catchtap="gotoUploadPage">上传作品</text>
+        </view>
+    </view>
+    <!-- 二、展示区域 -->
+    <view class='showCollection'>
+        <block wx:if='{{ showCard }}'>
+            <!-- 1、列表展示 -->
+            <view class='list-showMyCollection'>
+                <view 
+                    class='listItem'
+                    wx:for='{{ listData }}'
+                    wx:for-index='idx'
+                    wx:key="idx" 
+                    wx:for-item="listItem"
+                    data-productId='{{ listItem.productId }}'
+                    catchtap="gotoDetails">
+                    <view class='titleTime'>
+                        <view class='day'>{{ listItem.day }}</view>
+                        <view class='timeRight'>
+                            <view class='month'>{{ listItem.mouth }}</view>
+                            <view class='year'>{{ listItem.year }}</view>
+                        </view>
+                    </view>
+                    <view class='show'>
+                        <view 
+                            class='imgContainer'
+                            wx:for='{{ listItem.productPhoto }}'
+                            wx:key='imgIdx'
+                            wx:for-item='imgUrl'>
+                            <image src='{{ imgUrl }}'></image>
+                        </view>
+                        <!-- <view class='imgContainer'><image></image></view>
+                        <view class='imgContainer'><image></image></view> -->
+                    </view>
+                    <view class='operating-conatiner'>
+                        <view 
+                            class='iconModel'
+                            data-isLike='{{ listItem.isLiked }}'
+                            data-workId='{{ listItem.productId }}'
+                            data-index = '{{ idx }}'
+                            catchtap='userDianZan'>
+                            <icon class='icon-zan {{ listItem.isLiked ? "active" : "" }}'></icon>
+                            <text>{{ listItem.like }}</text>
+                        </view>
+                        <view 
+                            class='iconModel'
+                            data-workId='{{ listItem.productId }}'
+                            catchtap="goDetailsShowLiuYan">
+                            <icon class='icon-liuyan'></icon>
+                            <text>{{ listItem.comment }}</text>
+                        </view>
+                        <view class='iconModel'>
+                            <icon class='icon-fenxiang'></icon>
+                            <button 
+                                id='shareBtn'
+                                class='shareBtn' 
+                                plain='true' 
+                                open-type="share"
+                                hover-class='none'>
+                            </button>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </block>
+        <block wx:if='{{ !showCard }}'>
+            <!-- 2、相册展示 -->
+            <view class='book-showMyCollection'>
+                <!-- 里面的show应该根据图片数量来添加类型 
+                    show1-【单张图片】 
+                    show2-【偶数倍图片】  
+                    show3-【三张图片】
+                -->
+                <view 
+                    class='cardItem'
+                    wx:for='{{ listData }}'
+                    wx:for-item="cardItem"
+                    wx:for-index='idx'
+                    wx:key="idx" 
+                    data-productId='{{ cardItem.productId }}'
+                    catchtap="gotoDetails">
+                    <view class='titleTime'>
+                        <view class='day'>{{ cardItem.day }}</view>
+                        <view class='timeRight'>
+                            <view class='month'>{{ cardItem.mouth }}</view>
+                            <view class='year'>{{ cardItem.year }}</view>
+                        </view>
+                    </view>
+                    <view 
+                        class='show {{ cardItem.productPhoto.length%2 == 0 ? "show2" : cardItem.productPhoto.length == 1? "show1" : "show3" }}'>
+                        <view 
+                            class='imgContainer'
+                            wx:for='{{ cardItem.productPhoto }}'
+                            wx:key='imgIdx'
+                            wx:for-item='imgUrl'>
+                            <!-- ../../images/timg.jpg -->
+                            <image src='{{ imgUrl }}'></image>
+                        </view>
+                    </view>
+                    <view class='operating-conatiner'>
+                        <view 
+                            class='iconModel'
+                            data-isLike='{{ cardItem.isLiked }}'
+                            data-workId='{{ cardItem.productId }}'
+                            data-index = '{{ idx }}'
+                            catchtap='userDianZan'>
+                            <icon class='icon-zan {{ cardItem.isLiked ? "active" : "" }}'></icon>
+                            <text>{{ cardItem.like }}</text>
+                        </view>
+                        <view 
+                            class='iconModel'
+                            data-workId='{{ cardItem.productId }}'
+                            catchtap="goDetailsShowLiuYan">
+                            <icon class='icon-liuyan'></icon>
+                            <text>{{ cardItem.comment }}</text>
+                        </view>
+                        <view class='iconModel'>
+                            <icon class='icon-fenxiang'></icon>
+                            <button 
+                                id='shareBtn'
+                                class='shareBtn' 
+                                plain='true' 
+                                open-type="share"
+                                hover-class='none'>
+                            </button>
+                        </view>
+                    </view>    
+                </view>
+
+                <!-- 类型2：三张图片 -->
+                <!-- <view class='cardItem'>
+                    <view class='titleTime'>
+                        <view class='day'>24</view>
+                        <view class='timeRight'>
+                            <view class='month'>05</view>
+                            <view class='year'>2019</view>
+                        </view>
+                    </view>
+                    <view class='show show3'>
+                        <view class='imgContainer'>
+                            <image src='../../images/timg.jpg'></image>
+                        </view>
+                        <view class='imgContainer'>
+                            <image src='../../images/timg.jpg'></image>
+                        </view>   
+                        <view class='imgContainer'>
+                            <image src='../../images/timg.jpg'></image>
+                        </view>      
+                    </view>
+                    <view class='operating-conatiner'>
+                        <view class='iconModel'>
+                            <icon class='icon-zan active'></icon>
+                            <text>908</text>
+                        </view>
+                        <view class='iconModel'>
+                            <icon class='icon-liuyan'></icon>
+                            <text>908</text>
+                        </view>
+                        <view class='iconModel'>
+                            <icon class='icon-fenxiang-'></icon>
+                        </view>
+                    </view>    
+                </view> -->
+
+                <!-- 类型3：偶数倍的图片 -->
+                <!-- <view class='cardItem'>
+                    <view class='titleTime'>
+                        <view class='day'>24</view>
+                        <view class='timeRight'>
+                            <view class='month'>05</view>
+                            <view class='year'>2019</view>
+                        </view>
+                    </view>
+                    <view class='show show2'>
+                        <view class='imgContainer'>
+                            <image src='../../images/timg.jpg'></image>
+                        </view>
+                        <view class='imgContainer'>
+                            <image src='../../images/timg.jpg'></image>
+                        </view>
+                        <view class='imgContainer'>
+                            <image src='../../images/timg.jpg'></image>
+                        </view>
+                        <view class='imgContainer'>
+                            <image src='../../images/timg.jpg'></image>
+                        </view>
+                    </view>
+                    <view class='operating-conatiner'>
+                        <view class='iconModel'>
+                            <icon class='icon-zan active'></icon>
+                            <text>908</text>
+                        </view>
+                        <view class='iconModel'>
+                            <icon class='icon-liuyan'></icon>
+                            <text>908</text>
+                        </view>
+                        <view class='iconModel'>
+                            <icon class='icon-fenxiang-'></icon>
+                        </view>
+                    </view>    
+                </view> -->
+            </view>
+        </block>
+    </view>
+    <!-- 三、页脚 -->
+    <view class='footer-bottom' bindtap="gotoTipPage">
+        <view class='textContainer'>
+            <view class='textTop'>恭喜你！获得定制个人作品集纸质版资格</view>
+            <view class='textBottom'>以不同日期上传作品30个以上，累计评价100条以上</view>
+        </view>
+        <icon class='icon-gengduo'></icon>
+    </view>
+</view>

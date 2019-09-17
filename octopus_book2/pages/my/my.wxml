@@ -1,0 +1,83 @@
+<!--pages/my.wxml-->
+<view class='myPage'>
+    <view class='usertop'>
+        <view class='userInfo'>
+            <image class='avater' src='{{ avater }}'></image>
+            <text class='uname'>{{ userName }}</text>
+        </view>
+        <icon class='iconFonts icon-shezhi' bindtap='goToSetting'></icon>
+    </view>
+    <view class='myWorkContainer'>
+        <block wx:if="{{ userGrade == 1 }}">
+            <view class='myWork' catchtap='goMyWork'>
+                <text>我的作品（{{ userProductNum }}）</text>
+                <icon class='icon-shangchuan'></icon>
+            </view>         
+        </block>
+        <block wx:else>
+            <view class='myWork' catchtap='gotoZSXS'>
+                <text>招生线索</text>
+                <text class='text-btnBg'>{{ noViewClew }}</text>
+            </view> 
+            <view class='myWork' catchtap='gotoWDXY'>
+                <text>我的学员（{{ myStudents }}）</text>
+                <icon class='icon-shangchuan'></icon>
+            </view>          
+        </block>
+          
+        <view class='myCollection'> 
+            <block wx:if='{{ userGrade == 1 }}'>
+                <view class='myCollectionTitle'>
+                    <text>我的作品集</text>
+                    <icon class='icon-fenxiang'></icon>
+                    <button 
+                    class='shareBtn' 
+                    plain='true' 
+                    open-type="share"
+                    hover-class='none'></button>
+                </view>
+            </block>
+            <block wx:else>
+                <view class='myCollectionTitle'>
+                    <text>绘馆</text>
+                    <icon class='icon-fenxiang'></icon>
+                    <button 
+                    class='shareBtn' 
+                    plain='true' 
+                    open-type="share"
+                    hover-class='none'></button>
+                </view>
+            </block>
+            <view class='myCollectionDetails'>
+                <view class='imgCover'>
+                    <image 
+                        class='col-3' 
+                        wx:for='{{ gallery }}'
+                        wx:for-index='idx'
+                        wx:key='idx'
+                        wx:for-item='item'
+                        wx:if='{{ idx < 9 }}'
+                        mode='scaleToFill' 
+                        src='{{item}}'>
+                    </image>
+                </view>
+                <block wx:if='{{ userGrade == 1 }}'>
+                    <view class='collectionInfo'>
+                        <view>我的作品 {{ userProductCollectionNum }} 册</view>
+                        <view>累计点赞 {{ forward }} 次</view>
+                        <view>累计评价 {{ view }} 次</view>
+                        <view>累计访问 {{ getEnrollmentNum }} 条</view>
+                    </view>                
+                </block>
+                <block wx:else>
+                    <view class='collectionInfo'>
+                        <view>作品集 {{ collectionNum }}册</view>
+                        <view>家长转发 {{ forward }}次</view>
+                        <view>累计访问 {{ view }}次</view>
+                        <view>获取招生线索 {{ totalClews }}条</view>
+                    </view>
+                </block>
+            </view>
+        </view>
+    </view>
+</view>

@@ -1,0 +1,203 @@
+<view class='indexPage'>
+    <!-- 1、header-top -->
+    <view class="head-top">
+        <!-- 1.1  -->
+        <view class='head-left' bindtap="showAll">
+            <icon 
+                class="icon-quanbu {{ showSelected == 'all' ? 'active' : '' }}"></icon>
+            <text class="{{ showSelected == 'all' ? 'active' : '' }}">全部</text>
+        </view>
+        <!-- 1.2 -->
+        <view class='head-center'>
+            <icon 
+                catchtap="showCard"
+                class="icon-jiugongge {{showCard ? 'active': '' }}"></icon>
+            <icon 
+                bindtap="showList" 
+                class="icon-liebiao {{!showCard ? 'active': '' }}"></icon>
+        </view>
+        <!-- 1.3 根据用户进行显示-->
+        <block wx:if='{{ myListData.length > 0 && (userGrade == 1 || userGrade == 4) }}'>
+            <!-- 1、普通用户我的作品：页面跳转到我的会馆 -->
+            <view class='head-right' bindtap="gotoHuiGuan">
+                <text class="{{ showSelected == 'myWorks' ? 'active' : '' }}">我的作品集</text>
+            </view>
+        </block>
+        <block wx:if='{{ myListData.length == 0 && (userGrade == 1 || userGrade == 4) }}'>
+            <!-- 1、普通用户我的作品：页面跳转到我的会馆 -->
+            <view class='head-right' bindtap="gotoHuiGuan">
+                <text class="{{ showSelected == 'myWorks' ? 'active' : '' }}">创建作品集</text>
+            </view>
+        </block>
+        <!-- <block wx:if='{{ myListData.length > 0 && !(userGrade == 1) }}'>
+             2、商户用户：且列表数据>0 则为单击更新数据显示在当前页面 
+            <view class='head-right' bindtap="gotoHuiGuan">
+                <text class="{{ showSelected == 'myWorks' ? 'active' : '' }}">创建作品集</text>
+            </view>
+        </block> -->
+        <block wx:if='{{ !(userGrade == 1 || userGrade == 4) }}'>
+            <!-- 3、商户用户：显示创建作品集——直接跳到创建作品集页面 -->
+            <view class='head-right' bindtap="goToNewWork">
+                <text class="{{ showSelected == 'myWorks' ? 'active' : '' }}">创建作品集</text>
+            </view>
+        </block>
+    </view>
+    <!-- 2、container -->
+    <view class='itemShowContainer'>
+        <!-- 1、如果有作品信息 -->
+        <block wx:if='{{ listData.length > 0 }}'>
+            <block wx:if='{{ showCard }}'>
+                <!-- card展示效果区域 -->
+                <view class='cardShowContainer'>
+                    <view 
+                        class='cardContainer'
+                        wx:for='{{ listData }}'
+                        wx:for-item='item'
+                        wx:for-index="idx"
+                        wx:key='idx'
+                        data-shopId='{{ item.sampleReelsId }}'
+                        catchtap="gotoDetails">
+                        <view class='card'>
+                            <view class='cardAbout'>
+                                <!-- <image 
+                                    class='itemStart' 
+                                    src='./../../images/start.png'></image> -->
+                                <view class='itemImg'>
+                                    <image 
+                                        src='{{ item.sampleReelsCover }}'
+                                        mode='scaleToFill'
+                                        binderror="errImg" 
+                                        data-errorimg="{{idx}}">
+                                    </image>
+                                </view>
+                                <view class='itemInfo'>
+                                    <view 
+                                        class='itemZan'
+                                        data-isLike='{{ item.isLiked }}'
+                                        data-workId='{{ item.sampleReelsId }}'
+                                        data-index = '{{ idx }}'
+                                        catchtap='userDianZan'>
+                                        <icon 
+                                            class="icon-zan {{ item.isLiked ? 'active' : '' }}">
+                                        </icon>
+                                        <text>{{ item.likeNum }}</text>
+                                    </view>
+                                    <view class='itemPingLun'>
+                                        <icon class="icon-liuyan"></icon>
+                                        <text>{{ item.commentNum }}</text>
+                                    </view>
+                                </view>
+                            </view>
+                            <text class='cardTtitle'>{{ item.sampleReelsName }}</text>                
+                        </view>
+                    </view>
+
+                </view>
+            </block>
+            <block wx:if='{{ !showCard }}'>
+                <!-- 列表展示效果区域 -->
+                <view class='listShowContainer'>
+                    
+                        <view 
+                            class='listItem'
+                            wx:for='{{ listData }}'
+                            wx:for-item='item'
+                            wx:for-index="idx"
+                            wx:key='idx'data-shopId='{{ item.sampleReelsId }}'
+                            catchtap="gotoDetails">
+                            <!-- <view class='listItem-img'> -->
+                                <image 
+                                    class='listItem-img' 
+                                    src='{{ item.sampleReelsCover }}'
+                                    mode='scaleToFill'>
+                                </image>
+                            <!-- </view> -->
+                            <view class='listItemInfo'>
+                                <view class='listItemAbout'>
+                                    <view class='listItemInfoTitle'>
+                                        <view class='listItemInfoTitleText'>
+                                            {{ item.sampleReelsName }}
+                                        </view>
+                                        <image 
+                                            class='listItemUserAvater'
+                                            src='../../images/timg.jpg'
+                                            mode='scaleToFill'>
+                                        </image>
+
+                                    </view>
+                                    <view class='listItemInfoDesc'>
+                                        {{ item.samoleReelsDesc }}
+                                    </view>                        
+                                </view>
+                                <view class='operating-conatiner'>
+                                    <!-- <view class='iconModel'> -->
+                                    <view 
+                                        class='iconModel'
+                                        data-isLike='{{ item.isLiked }}'
+                                        data-workId='{{ item.sampleReelsId }}'
+                                        data-index = '{{ idx }}'
+                                        catchtap='userDianZan'>
+                                        <icon 
+                                            class="icon-zan {{ item.isLiked ? 'active' : '' }}">
+                                        </icon>
+                                        <text>{{ item.likeNum }}</text>
+                                    </view>
+                                    <view class='iconModel'>
+                                        <icon class='icon-liuyan'></icon>
+                                        <text>{{ item.commentNum }}</text>
+                                    </view>
+                                    <view class='iconModel'>
+                                        <icon class='icon-fenxiang'></icon>
+                                        <button 
+                                            id='shareBtn'
+                                            class='shareBtn' 
+                                            plain='true' 
+                                            open-type="share"
+                                            hover-class='none'>
+                                        </button>
+                                    </view>
+                                </view>
+                            </view>
+                        </view>
+                
+                </view> 
+            </block>         
+        </block>
+        <!-- 2、如果没有作品信息 -->
+        <block wx:else>
+            <view class='nodata-top'>
+                <!-- 2.1.1、top -->
+                <image 
+                    class='nodata-top-logo'
+                    mode='scaleToFill'
+                    src='../../images/nowork.png'>
+                </image>
+                <!-- 2.1.2、info -->
+                <view class='nodata-info'>
+                    <view class='nodata-info-title'>
+                        还没有作品集  
+                    </view>
+                    <!-- 如果是商类用户则显示 text 不是不显示 -->
+                    <view 
+                        class='nodata-info-text'
+                        wx:if='{{ userGrade == 1 }}'>
+                            为每个学员创建他的专属作品集，并活跃更新内容 作为家长分享内容，课获取更多招生线索 
+                    </view>
+                </view>
+                <!-- 2.1.3、btns -->
+                <view class='nodata-btns'>
+                    <view 
+                        class='nodata-btn nodata-goToNewWork'
+                        bindtap='goToNewWork'>
+                        创建作品集
+                    </view>
+                    <view 
+                        class='nodata-btn nodata-gotoOldWork'
+                        bindtap='showAll'>
+                        查看官方作品集
+                    </view>
+                </view>
+             </view>
+        </block>
+    </view>
+</view>

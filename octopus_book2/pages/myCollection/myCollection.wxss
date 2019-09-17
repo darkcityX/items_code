@@ -1,0 +1,199 @@
+/* ------------- 二、内容区域公共部分：时间、和评论、分享留言 ------开始------- */
+.showCollection{
+    margin-bottom: 124rpx;
+    padding: 40rpx 30rpx;
+}
+/* 1.1 时间 */
+.titleTime{
+    position: absolute;
+    top: -30rpx;
+    display: flex;
+    align-items: center;
+}
+.day{
+    padding: 0 20rpx;
+    padding-right: 10rpx;
+    color: #333;
+    font-size: 40rpx;
+    font-weight: 600;
+}
+.timeRight{
+    color: #666;
+    font-size: 24rpx;
+    text-align: center;
+}
+.mounth{
+    font-size: 32rpx;
+}
+
+/* ------------- 三、列表形式展示区域 --------开始-----*/
+.list-showMyCollection{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+.list-showMyCollection .listItem{
+    position: relative;
+    margin-bottom: 40rpx;
+    padding-top: 50rpx;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    border-left: 1px solid #999;
+}
+.list-showMyCollection .listItem::before{
+    position: absolute;
+    top: -10rpx;
+    left: -8.5rpx;
+    display: block;
+    content: "";
+    width: 20rpx;
+    height: 20rpx;
+    border-radius: 50%;
+    z-index: 10;
+    background: #FC9E3C;
+}
+.list-showMyCollection .listItem .show{
+    padding-left: 20rpx;
+    display: flex;
+    flex-wrap: wrap;
+}
+.list-showMyCollection .listItem .show .imgContainer{
+    box-sizing: border-box;
+    display: flex;
+    padding: 10rpx;
+    width: 33.3%;
+    object-fit: contain;
+    align-items: center;
+
+}
+.list-showMyCollection .listItem .show .imgContainer image{
+   width: 200rpx;
+   height: 200rpx; 
+   border-radius: 8rpx;
+   background: #f5f5f5;
+}
+
+/* ------------- 四、卡片形式展示区域 --------开始-----*/
+.book-showMyCollection{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;    
+}
+.book-showMyCollection .cardItem{
+    position: relative;
+    margin-bottom: 60rpx;
+    padding-top: 50rpx;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+.book-showMyCollection .cardItem::before{
+    position: absolute;
+    top: -10rpx;
+    left: -8.5rpx;
+    display: block;
+    content: "";
+    width: 20rpx;
+    height: 20rpx;
+    border-radius: 50%;
+    z-index: 10;
+    background: #FC9E3C;
+}
+.book-showMyCollection .cardItem:last-child{
+    margin-bottom: 0;
+}
+
+.book-showMyCollection .show{
+    box-sizing: border-box;
+    margin-top: 20rpx;
+    margin-bottom: 40rpx;
+    padding-left: 20rpx;
+    display: flex;
+}
+.book-showMyCollection .show .imgContainer{
+    box-sizing: border-box; 
+    object-fit: contain;   
+}
+.book-showMyCollection .show .imgContainer image{
+    display: inline-block;
+    width: 100%;
+    height: 100%;  
+}
+.book-showMyCollection .show1{
+    flex: 1;
+}
+.book-showMyCollection .show1 .imgContainer{
+    width: 100%;
+    height: 666rpx;
+}
+.book-showMyCollection .show2{
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+.book-showMyCollection .show2 .imgContainer{
+    width: 333rpx;
+    height: 333rpx;
+}
+.book-showMyCollection .show2 .imgContainer:nth-child(3),.book-showMyCollection .show2 .imgContainer:nth-child(4){
+    margin-top: 20rpx;
+}
+.book-showMyCollection .show2 .imgContainer:nth-child(2n-1) image{
+    padding-right: 5rpx;
+}
+.book-showMyCollection .show2 .imgContainer:nth-child(2n) image{
+    padding-left: 5rpx;
+}
+.book-showMyCollection .show3{
+    width: 100%;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+.book-showMyCollection .show3 .imgContainer:nth-child(1){
+    margin-bottom: 20rpx;
+    width: 100%;
+    height: 400rpx;
+}
+.book-showMyCollection .show3 .imgContainer:nth-child(2){
+    padding-right: 10rpx;
+    width: 40%;
+    height: 334rpx;
+}
+.book-showMyCollection .show3 .imgContainer:nth-child(3){
+    padding-left: 10rpx;
+    width: 60%;
+    height: 334rpx;
+}
+
+/* ------------- 五、页脚 --------页脚提示-----*/
+.footer-bottom{
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    z-index: 11;
+    box-sizing: border-box;
+    padding: 20rpx 40rpx;
+    /* padding-left: 40rpx;
+    padding-right: 20rpx; */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #fff;
+    width:100%;
+    opacity:0.5;
+    border-radius: 4px 4px 0 0;
+    background:rgba(0,0,0,1);
+
+}
+.textTop{
+    padding-bottom: 10rpx;
+    font-size: 28rpx;
+}
+.textBottom{
+    padding-top: 10rpx;
+    font-size: 20rpx;
+}
+
+
+
+

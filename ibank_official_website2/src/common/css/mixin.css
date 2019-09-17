@@ -1,0 +1,38 @@
+/**
+ * 一、封装:背景
+*/
+/**
+ * 二、楼层版心样式设置
+ * @height [楼层高度]
+ * @marginTop [上外边距]
+*/
+/**！！！函数二、三可以合并
+ * 三、楼层版心样式设置————居中
+*/
+.containerSet {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  min-width: 1200px;
+  width: 1200px;
+  transform: translateX(-50%);
+}
+/**
+ * 四、flex父容器设置函数
+ * @direction   排列方向
+ * @Alignment   对齐方式
+*/
+/*
+ * 五、背景渐变色
+ * @color1 颜色1
+ * @color2 颜色2
+*/
+/*
+ * 六、边距重置
+*/
+.resize {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  border: none;
+}
