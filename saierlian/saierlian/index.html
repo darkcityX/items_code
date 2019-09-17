@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+    <meta name="format-detection" content="telephone=no" />
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <link rel="shortcut icon" href=""/>
+    <title></title>
+    <script>
+      window.sessionStorage.setItem('weirenzheng','unknown')
+    window.addEventListener("resize",
+      function() {
+          var MAX_WIDTH = 640,
+          htmlDom = document.querySelector("html"),
+          htmlWidth = htmlDom.clientWidth,
+          screenWidth = screen.width,
+          width = Math.min(htmlWidth, MAX_WIDTH),
+          htmlFontSize = width / 10,
+          preHtmlFontSize = htmlDom.style.fontSize || "";
+          preHtmlFontSize = parseFloat(preHtmlFontSize);
+          if (preHtmlFontSize && htmlFontSize == preHtmlFontSize) {
+              return
+          }
+          if (screenWidth > 750) {
+              htmlFontSize = 37.5
+          };
+          htmlDom.style.fontSize = htmlFontSize + "px"
+      }); !
+      function() {
+          var event = document.createEvent("HTMLEvents");
+          event.initEvent("resize", false, false);
+          window.dispatchEvent(event)
+      } ();
+    </script>
+    <style>
+      .zhuanfa_cont{
+        width:100%;
+        height: 100vh;
+        position: fixed;
+        bottom: 0;
+        z-index: 2000;
+        display: none;
+      }
+      .top_zhezhao{
+        width:100%;
+        height:90%;
+        background:rgba(0,0,0,.6);
+        position: absolute;
+        top: 0;
+      }
+      .zhuanfa_bott{
+        width:100%;
+        height:10%;
+        background:#ffffff;
+        position: absolute;
+        bottom: 0;
+        z-index: 2001;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app"></div>
+    <!-- built files will be auto injected -->
+    <!-- <div class="zhuanfa_cont" id="zhuanfacont">
+      <div class="top_zhezhao" id="hidezhuanfa"></div>
+      <div class="zhuanfa_bott" style="text-align: center;">
+        <div class="bdsharebuttonbox" style="display: inline-block;margin-top:10px;">
+          <a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信" style="margin-left:20px;margin-right:20px;width:28px;height:24px;background-image:url('/static/img/weixinfx.png');background-position: 0 0;background-size:100%;padding-left: 0;"></a>
+          <a href="#" class="bds_sqq" data-cmd="sqq" title="分享到QQ好友" style="margin-left:20px;margin-right:20px;width:23px;height:26px;background-image:url('/static/img/QQfx.png');background-position: 0 0;background-size:100%;padding-left: 0;"></a>
+          <a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间" style="margin-left:20px;margin-right:20px;width:26px;height:26px;background-image:url('/static/img/QQkjfx.png');background-position: 0 0;background-size:100%;padding-left: 0;"></a>
+        </div>
+      </div>
+    </div> -->
+    <script>
+      window.addEventListener(
+        "touchmove",
+        function(event) {
+            event.preventDefault();
+        }
+      );
+      function getUrlParam(name) {
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+        var r = window.location.search.substr(1).match(reg);  //匹配目标参数
+        if (r != null) return unescape(r[2]); return null; //返回参数值
+      }
+      var cid = getUrlParam('cid');
+      window.sessionStorage.setItem('classid',cid)
+      window._bd_share_config={
+        common:{
+          bdSnsKey:{},
+          bdText:"",
+          bdMini:"1",
+          bdMiniList:false,
+          bdPic:"",
+          bdStyle:"1",
+          bdSize:"16",
+          bdUrl: "http://m.ziyushi.com?cid="+cid
+        },
+        share:{},
+        // image:{"viewList":["weixin","sqq","qzone"],"viewText":"分享到：","viewSize":"32"},
+        // selectShare:{"bdContainerClass":null,"bdSelectMiniList":["weixin","sqq","qzone"]}
+      };
+      with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+      var zhuanfacont=document.getElementById('hidezhuanfa')
+      zhuanfacont.onclick=function(){
+        document.getElementById('zhuanfacont').style.display='none'
+      }
+    </script>
+  </body>
+</html>
